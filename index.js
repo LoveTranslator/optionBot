@@ -99,7 +99,7 @@ bot.onText(/\/start/, function(msg, match) {
   
 Пройдите небольшой опрос, чтобы мы могли узнать больше о Вашем аккаунте: 
   `);
-    console.log(user);
+    /* console.log(user); */
     setTimeout(newQuestion.bind(this, msg), 2000);
 });
 
@@ -119,7 +119,7 @@ bot.on('callback_query', function(msg) {
             endPoll(msg);
         }
     }
-    console.log(user);
+    /* console.log(user); */
     newQuestion(msg);
 });
 
