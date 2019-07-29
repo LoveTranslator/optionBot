@@ -3,29 +3,24 @@ process.env.NTBA_FIX_319 = 1
 var TelegramBot = require('node-telegram-bot-api');
 
 // Устанавливаем токен, который выдавал нам бот.
-var token = '893848783:AAHAgAwkPcLsrQdyeneWnsbAD6Twhu_X9O8';
+var token = '766599402:AAGMExKVovquBJq8QA0RDkVqq2yQT7G4PmI';
 
 // Включить опрос сервера
 var bot = new TelegramBot(token, { polling: true });
 
 var user = [];
 
-function test() {
-    console.log('123');
-}
-
-/* var menu = {
+var menu = {
     reply_markup: JSON.stringify({
         keyboard: [
             [{
-                text: 'Перезапустить опрос',
-                callback_data: test()
+                text: 'Перезапустить опрос'
             }]
         ],
         resize_keyboard: true,
-        one_time_keyboard: true
+        one_time_keyboard: false
     })
-}; */
+};
 
 var questions = [{
     title: 'Вашему аккаунту больше года?',
@@ -98,11 +93,24 @@ function newQuestion(msg) {
             user[i].answerNumber++;
         }
     }
-    
     bot.sendMessage(chat, text, options);
 }
 
 bot.onText(/\/start/, function (msg, match) {
+    myStart(msg);
+});
+
+bot.onText(/\Перезапустить опрос/, (msg, match) => {
+    myStart(msg);
+});
+
+function myStart(msg) {
+    for (let i = 0; i < user.length; i++) {
+        if (user[i].id === msg.from.id) {
+            user.splice(i, 1);
+        }
+    }
+
     user.push({ id: msg.from.id, answerNumber: 0, countRightAnswer: 0 })
     bot.sendMessage(msg.from.id, `Мы – команда молодых SMM-специалистов. Недавно мы начали развивать направление Facebook Ads и столкнулись с проблемой ограниченных рекламных возможностей в этой социальной сети. К сожалению, Facebook запрещает создавать рекламные объявления со свежих аккаунтов, а также ограничивает создание объявлений с одного аккаунта. В связи с этим мы проделываем следующие этапы:
 
@@ -115,11 +123,9 @@ bot.onText(/\/start/, function (msg, match) {
 Да! Мы подписываем с Вами договор при личной встрече в 2х экземплярах. У Вас всегда будет полноценный доступ к аккаунту. Никаких постов от вашего имени и спама – Ваши друзья не догадаются, что вы зарабатываете на своей страничке. Мы будем комментировать и делать репосты новостей с популярных СМИ, но эти посты никто кроме вас не будет видеть. Мы не будем изменять Ваш логин. Пароль может быть изменен, но после предупреждения и согласования нового с Вами. Это делается по техническим причинам, так как Facebook периодически просит о смене пароля для безопасности. 
   
 Пройдите небольшой опрос, чтобы мы могли узнать больше о Вашем аккаунте: 
-  `);
-
-
+  `, menu);
     setTimeout(newQuestion.bind(this, msg), 2000);
-});
+}
 
 bot.on('callback_query', function (msg) {
     var answer = msg.data.split('_');
