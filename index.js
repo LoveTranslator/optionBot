@@ -3,7 +3,7 @@ process.env.NTBA_FIX_319 = 1
 var TelegramBot = require('node-telegram-bot-api');
 
 // Устанавливаем токен, который выдавал нам бот.
-var token = '766599402:AAGMExKVovquBJq8QA0RDkVqq2yQT7G4PmI';
+var token = '766599402:AAGMExKVovquBJq8QA0RDkVqq2yQT7G4PmI'; // 766599402:AAGMExKVovquBJq8QA0RDkVqq2yQT7G4PmI
 
 // Включить опрос сервера
 var bot = new TelegramBot(token, { polling: true });
@@ -150,7 +150,7 @@ bot.on('callback_query', function (msg) {
 function endPoll(msg) {
     for (let i = 0; i < user.length; i++) {
         if (user[i].id === msg.from.id && user[i].countRightAnswer === questions.length) {
-            bot.sendMessage(841422237, `Ёу хокаге, у нас новый генин, он успешно прошёл экзамен - @${msg.from.username}`); //230431843 - hokage, newHokage - 841422237
+            bot.sendMessage(841422237, `Ёу хокаге, у нас новый генин, он успешно прошёл экзамен - @${msg.from.username}.(id ${msg.from.id})`); //230431843 - hokage, newHokage - 841422237
             bot.sendMessage(msg.from.id, "Спасибо, наш менеджер скоро с вами свяжется:)");
             user.splice(i, 1);
             break;
