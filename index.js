@@ -187,7 +187,7 @@ bot.on('message', function (msg) {
 function endPoll(msg) {
     for (let i = 0; i < user.length; i++) {
         if (user[i].id === msg.from.id && user[i].countRightAnswer === questions.length) {
-            bot.sendMessage(msg.from.id, "Спасибо за пройденный опрос, оставьте пожалуйста в следующем сообщении Ваше имя пользователя от аккаунта Instagram, ссылку на Ваш аккаунт Facebook а также свой город проживания, и наш менеджер скоро с вами свяжется:)");
+            bot.sendMessage(msg.from.id, "Спасибо за пройденный опрос, оставьте ваше имя пользователя от аккаунта Instagram а также свой город проживания, и наш менеджер скоро с вами свяжется:)");
         } else {
             bot.sendMessage(msg.from.id, "К сожалению вы нам не подходите, попробуйте в следующий раз.");
             user.splice(i, 1);
