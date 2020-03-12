@@ -4,7 +4,7 @@ var TelegramBot = require('node-telegram-bot-api');
 
 // Устанавливаем токен, который выдавал нам бот.
 
-var token = '766599402:AAGMExKVovquBJq8QA0RDkVqq2yQT7G4PmI'; // 922777706:AAGQU6l-8l2UMJ9qRVaQRyo59gQAzHGxrik
+var token = '933664978:AAG1_0xHSTk0wBVUERvHpK6z5z363WynyqE'; // 922777706:AAGQU6l-8l2UMJ9qRVaQRyo59gQAzHGxrik  766599402:AAGMExKVovquBJq8QA0RDkVqq2yQT7G4PmI
 
 // Включить опрос сервера
 var bot = new TelegramBot(token, {
@@ -177,7 +177,7 @@ bot.on('message', function (msg) {
         if (user[i].id === msg.from.id && user[i].countRightAnswer === questions.length) {
             user.instaLogin = msg.text;
             bot.sendMessage(msg.from.id, "Отлично, скоро с вами свяжутся:)");
-            bot.sendMessage(841422237, `Ёу хокаге, у нас новый генин, он успешно прошёл экзамен - @${msg.from.username}.(id ${msg.from.id}). Instagram login - ${user.instaLogin}`); //230431843 - hokage, newHokage - 841422237
+            bot.sendMessage(841422237, `Ёу хокаге, у нас новый генин, он успешно прошёл экзамен - @${msg.from.username}.(id ${msg.from.id}). Instagram login - ${user.instaLogin}`); //230431843 - hokage, newHokage - 841422237, my - 273352112
             user.splice(i, 1);
             break;
         }
