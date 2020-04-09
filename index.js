@@ -120,7 +120,7 @@ function newQuestion(msg) {
             user[i].answerNumber++;
         }
     }
-    bot.sendMessage(chat, text, options);
+     bot.sendMessage(chat, text, options);
 }
 
 bot.on('callback_query', function onCallbackQuery(msg) {
