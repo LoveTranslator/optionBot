@@ -70,7 +70,7 @@ var questions = [{
         right_answer: 1
     },
     {
-        title: 'Вы проявляли социальную активность на аккаунте Facebook в течении всего его существования (лайки, комментарии, добавление фотографий)?',
+        title: 'Вы сдавали ранее аккаунт Facebook в аренду?',
         buttons: [
             [{
                 text: 'Да',
@@ -79,20 +79,6 @@ var questions = [{
             [{
                 text: 'Нет',
                 callback_data: '3_2'
-            }],
-        ],
-        right_answer: 1
-    },
-    {
-        title: 'Вы сдавали ранее аккаунт Facebook в аренду?',
-        buttons: [
-            [{
-                text: 'Да',
-                callback_data: '4_1'
-            }],
-            [{
-                text: 'Нет',
-                callback_data: '4_2'
             }],
         ],
         right_answer: 2
