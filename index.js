@@ -86,6 +86,7 @@ var questions = [{
 ];
 
 function newQuestion(msg) {
+    console.log(user);
     chat = msg.hasOwnProperty('chat') ? msg.chat.id : msg.from.id;
     var arr;
     for (let i = 0; i < user.length; i++) {
@@ -106,7 +107,7 @@ function newQuestion(msg) {
             user[i].answerNumber++;
         }
     }
-     bot.sendMessage(chat, text, options);
+    bot.sendMessage(chat, text, options);
 }
 
 bot.on('callback_query', function onCallbackQuery(msg) {
@@ -147,9 +148,11 @@ function endPoll(msg) {
         if (user[i].id === msg.from.id && user[i].countRightAnswer === questions.length) {
             bot.sendMessage(msg.from.id, "Спасибо за пройденный опрос! Оставьте логин на свой Instagram или ссылку на любую другую социальную сеть для связи с Вами, также укажите город проживания.");
         } else {
-            bot.sendMessage(msg.from.id, "К сожалению вы нам не подходите, попробуйте в следующий раз.");
-            user.splice(i, 1);
-            break;
+            if (user[i].id === msg.from.id && user[i].answerNumber === questions.length) {
+                bot.sendMessage(msg.from.id, "К сожалению вы нам не подходите, попробуйте в следующий раз.");
+                user.splice(i, 1);
+                break;
+            }
         }
     }
 }
@@ -175,7 +178,7 @@ function myStart(msg) {
         countRightAnswer: 0,
         answerNumberWithAccount: 0,
         instaLogin: null
-    })
+    });
     bot.sendMessage(msg.from.id, `Добрый день :) 
     Мы – команда молодых SMM-специалистов. Недавно мы начали развивать направление Facebook Ads и столкнулись с проблемой ограниченных рекламных возможностей в этой социальной сети. К сожалению, Facebook запрещает создавать рекламные объявления со свежих аккаунтов, а также ограничивает создание объявлений с одного аккаунта. В связи с этим мы проделываем следующие этапы:     
 1) Берем аккаунты Facebook у людей.
